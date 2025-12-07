@@ -1,20 +1,27 @@
 
-
 "use client"
 
+// 🚨 FIX 1: Move CSS import to the top level of the file
+import "leaflet/dist/leaflet.css"
+
 import { useState } from "react"
-import { MapContainer, TileLayer } from "react-leaflet"
+import dynamic from 'next/dynamic'
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Card } from "@/components/ui/card"
+import type { LatLngExpression } from 'leaflet'
 
-// Center on Chalt Nager
-const CENTER = [33.515, 73.072]
-const ZOOM = 12
+// --- Type Definitions for Safety ---
+type LayerKey = "LULC 2015" | "LULC 2020" | "LULC 2024"
+type TileUrls = { [K in LayerKey]: string }
+type SelectedLayersState = { [K in LayerKey]?: boolean }
+type LayerOpacitiesState = { [K in LayerKey]: number }
+// ------------------------------------
+const CENTER: LatLngExpression = [36.2512, 74.3226]
+const ZOOM = 14
 
-// GEE asset tile URLs
-const TILE_URLS = {
+const TILE_URLS: TileUrls = {
   "LULC 2015":
     "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/e8ad02bb69c3baad22fb19c502a4c7ac-076731c8b7243ac339b32cf194c8bbaf/tiles/{z}/{x}/{y}",
   "LULC 2020":
@@ -31,25 +38,78 @@ const legendItems = [
   { name: "Barren", color: "#d0d6ff" },
 ]
 
+// 🚨 MapContent now only contains JS logic and dynamically requires react-leaflet
+const MapContent = ({
+  selectedLayers,
+  layerOpacities
+}: {
+  selectedLayers: SelectedLayersState,
+  layerOpacities: LayerOpacitiesState
+}) => {
+  // 🚨 FIX 2: Only require the React Leaflet components
+  const { MapContainer, TileLayer } = require("react-leaflet");
+
+  return (
+    <MapContainer center={CENTER} zoom={ZOOM} style={{ height: "100%", width: "100%" }}>
+      {/* Google Hybrid: Satellite + Labels/Roads */}
+      <TileLayer
+        url="https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
+        subdomains={["mt0", "mt1", "mt2", "mt3"]}
+        attribution="&copy; Google"
+      />
+
+      {/* GEE Tile Layers */}
+      {Object.entries(selectedLayers)
+        .filter(([, isSelected]) => isSelected)
+        .map(([layer, _]) => {
+          const key = layer as LayerKey;
+          return (
+            <TileLayer
+              key={key}
+              url={TILE_URLS[key]}
+              opacity={layerOpacities[key]}
+            />
+          )
+        })}
+    </MapContainer>
+  );
+};
+
+
+const DynamicMap = dynamic(
+  () => Promise.resolve(MapContent),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center w-full h-full text-lg text-muted-foreground bg-gray-50/50">
+        <div className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-lg">
+          <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-primary"></div>
+          Loading Map Data...
+        </div>
+      </div>
+    ),
+  }
+)
+
 const MapGEE = () => {
-  const [selectedLayers, setSelectedLayers] = useState<any>({
+  const [selectedLayers, setSelectedLayers] = useState<SelectedLayersState>({
     "LULC 2024": true,
   })
 
-  const [layerOpacities, setLayerOpacities] = useState({
+  const [layerOpacities, setLayerOpacities] = useState<LayerOpacitiesState>({
     "LULC 2015": 0.7,
     "LULC 2020": 0.7,
     "LULC 2024": 0.8,
   })
 
-  const handleLayerToggle = (layer: string) => {
+  const handleLayerToggle = (layer: LayerKey) => {
     setSelectedLayers((prev) => ({
       ...prev,
       [layer]: !prev[layer],
     }))
   }
 
-  const handleOpacityChange = (layer: string, newOpacity: number) => {
+  const handleOpacityChange = (layer: LayerKey, newOpacity: number) => {
     setLayerOpacities((prev) => ({
       ...prev,
       [layer]: newOpacity,
@@ -70,7 +130,7 @@ const MapGEE = () => {
           <h2 className="text-sm font-semibold text-foreground uppercase tracking-wide">Layers</h2>
 
           <div className="space-y-4">
-            {Object.keys(TILE_URLS).map((layer) => (
+            {(Object.keys(TILE_URLS) as LayerKey[]).map((layer) => (
               <Card
                 key={layer}
                 className={`p-4 transition-all duration-200 ${selectedLayers[layer] ? "bg-primary/10 border-primary/50" : "bg-card border-border"
@@ -80,7 +140,7 @@ const MapGEE = () => {
                   <div className="flex items-center space-x-3">
                     <Checkbox
                       id={`layer-${layer}`}
-                      checked={selectedLayers[layer]}
+                      checked={!!selectedLayers[layer]}
                       onCheckedChange={() => handleLayerToggle(layer)}
                       className="w-4 h-4"
                     />
@@ -135,20 +195,10 @@ const MapGEE = () => {
 
       {/* Map */}
       <main className="flex-1 overflow-hidden">
-        <MapContainer center={CENTER} zoom={ZOOM} style={{ height: "100%", width: "100%" }}>
-          {/* Google Hybrid: Satellite + Labels/Roads */}
-          <TileLayer
-            url="https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
-            subdomains={["mt0", "mt1", "mt2", "mt3"]}
-            attribution="&copy; Google"
-          />
-
-          {Object.entries(selectedLayers)
-            .filter(([_, isSelected]) => isSelected)
-            .map(([layer, _]) => (
-              <TileLayer key={layer} url={TILE_URLS[layer]} opacity={layerOpacities[layer]} />
-            ))}
-        </MapContainer>
+        <DynamicMap
+          selectedLayers={selectedLayers}
+          layerOpacities={layerOpacities}
+        />
       </main>
     </div>
   )
