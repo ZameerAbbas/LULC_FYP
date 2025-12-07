@@ -1,0 +1,215 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "0",
+            "properties": {
+                "Area_km2": 0.6674854055192565,
+                "Class_ID": 0,
+                "Percent": 8.99396970960518,
+                "Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "1",
+            "properties": {
+                "Area_km2": 1.3596074114681431,
+                "Class_ID": 1,
+                "Percent": 18.319902989019596,
+                "Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "2",
+            "properties": {
+                "Area_km2": 2.630817899993756,
+                "Class_ID": 2,
+                "Percent": 35.44870990194006,
+                "Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "3",
+            "properties": {
+                "Area_km2": 0.7254954398169414,
+                "Class_ID": 3,
+                "Percent": 9.775620494794495,
+                "Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "4",
+            "properties": {
+                "Area_km2": 2.0392477373786466,
+                "Class_ID": 4,
+                "Percent": 27.47765303736715,
+                "Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "5",
+            "properties": {
+                "Area_km2": 0.7931888493817515,
+                "Class_ID": 0,
+                "Percent": 10.687749014956175,
+                "Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "6",
+            "properties": {
+                "Area_km2": 1.4062591058275336,
+                "Class_ID": 1,
+                "Percent": 18.948506884326804,
+                "Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "7",
+            "properties": {
+                "Area_km2": 2.4360983309316557,
+                "Class_ID": 2,
+                "Percent": 32.824979268235026,
+                "Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "8",
+            "properties": {
+                "Area_km2": 0.6584960822560022,
+                "Class_ID": 3,
+                "Percent": 8.872843913488838,
+                "Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "9",
+            "properties": {
+                "Area_km2": 2.1286115257798137,
+                "Class_ID": 4,
+                "Percent": 28.681777051719813,
+                "Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "10",
+            "properties": {
+                "Area_km2": 0.8315854126254217,
+                "Class_ID": 0,
+                "Percent": 11.205119917617127,
+                "Year": 2024
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "11",
+            "properties": {
+                "Area_km2": 1.0848086863972972,
+                "Class_ID": 1,
+                "Percent": 14.61715325233789,
+                "Year": 2024
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "12",
+            "properties": {
+                "Area_km2": 2.605299045004917,
+                "Class_ID": 2,
+                "Percent": 35.104858475533405,
+                "Year": 2024
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "13",
+            "properties": {
+                "Area_km2": 0.6851447822473844,
+                "Class_ID": 3,
+                "Percent": 9.23191933078039,
+                "Year": 2024
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "14",
+            "properties": {
+                "Area_km2": 2.215815967901728,
+                "Class_ID": 4,
+                "Percent": 29.85680515645774,
+                "Year": 2024
+            }
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "0",
+            "properties": {
+                "Changed_Area_km2": 1.3882831969664353,
+                "Changed_Percent": 18.706292180510818,
+                "End_Year": 2020,
+                "Start_Year": 2015
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "1",
+            "properties": {
+                "Changed_Area_km2": 1.3868721142915654,
+                "Changed_Percent": 18.687278678896266,
+                "End_Year": 2024,
+                "Start_Year": 2020
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "MultiPoint",
+                "coordinates": []
+            },
+            "id": "2",
+            "properties": {
+                "Changed_Area_km2": 1.5746351842651418,
+                "Changed_Percent": 21.21727461582781,
+                "End_Year": 2024,
+                "Start_Year": 2015
+            }
+        }
+    ]
+}
