@@ -36,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="h-full"> 
+      <body className={`h-full flex flex-col font-sans antialiased`}> 
         <header className="bg-slate-950 border-b border-slate-700 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-8 py-4">
             <div className="flex items-center justify-between">
@@ -53,7 +53,12 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-        {children}
+
+        {/* WRAP {children} in a new div with Flexbox classes */}
+        <div className="flex-grow overflow-y-auto">
+          {children}
+        </div>
+
         <Analytics />
       </body>
     </html>
