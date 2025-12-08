@@ -3,7 +3,6 @@
 
 "use client"
 
-// 🚨 FIX 1: Move CSS import to the top level of the file
 import "leaflet/dist/leaflet.css"
 
 import { useEffect, useState } from "react"
@@ -13,10 +12,9 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Card } from "@/components/ui/card"
 import type { LatLngExpression } from 'leaflet'
-import L from "leaflet"
+// import L from "leaflet"
 
-// --- Type Definitions for Safety ---
-// 1. ADDED: The new change layer keys to LayerKey
+
 type LULCLayerKey = "LULC 2015" | "LULC 2020" | "LULC 2024"
 type ChangeLayerKey = "CHANGE 15 20" | "CHANGE 15 24" | "CHANGE 20 24"
 type LayerKey = LULCLayerKey | ChangeLayerKey
@@ -52,99 +50,84 @@ const lulcLegendItems = [
   { name: "Barren", color: "#d0d6ff" },
 ]
 
-const changeLegendItems = [
-  { name: "No Significant Change", color: "#000000" },
-  { name: "Change Type 1 (Code 1)", color: "#FF0000" },
-  { name: "Change Type 2 (Code 2)", color: "#00FF00" },
-  { name: "Change Type 3 (Code 3)", color: "#0000FF" },
-]
 
 
-const createLegendHTML = (title: string, items: any[]) => `
-    <div class="legend-content p-2 bg-white/80 backdrop-blur-sm shadow-md rounded-md">
-        <h3 class="text-xs font-bold text-gray-700 uppercase mb-1">${title}</h3>
-        <div class="space-y-1 text-sm">
-            ${items.map(item => `
-                <div class="flex items-center gap-2">
-                    <div 
-                        style="background-color: ${item.color};"
-                        class="w-3 h-3 rounded border border-gray-300 flex-shrink-0"
-                    ></div>
-                    <span class="text-xs text-gray-800">${item.name}</span>
-                </div>
-            `).join('')}
-        </div>
-    </div>
-`;
+// const createLegendHTML = (title: string, items: any[]) => `
+//     <div class="legend-content p-2 bg-white/80 backdrop-blur-sm shadow-md rounded-md">
+//         <h3 class="text-xs font-bold text-gray-700 uppercase mb-1">${title}</h3>
+//         <div class="space-y-1 text-sm">
+//             ${items.map(item => `
+//                 <div class="flex items-center gap-2">
+//                     <div 
+//                         style="background-color: ${item.color};"
+//                         class="w-3 h-3 rounded border border-gray-300 flex-shrink-0"
+//                     ></div>
+//                     <span class="text-xs text-gray-800">${item.name}</span>
+//                 </div>
+//             `).join('')}
+//         </div>
+//     </div>
+// `;
 
 
 
 
 
-const MapLegendControl = ({ isLULCActive, }: { isLULCActive: boolean, }) => {
+// const MapLegendControl = ({ isLULCActive, }: { isLULCActive: boolean, }) => {
 
-  const { useMap } = require("react-leaflet");
-  const map = useMap();
-
-
-  const LegendClass = L.Control.extend({
-    options: {
-      position: 'bottomright',
-    },
-    onAdd: function (map: L.Map) {
-      // This is the container where all legends will live
-      const container = L.DomUtil.create('div', 'leaflet-control-legend-container flex flex-col gap-2');
-
-      // CRUCIAL: Prevent map interaction when clicking/scrolling the legend
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
-
-      // We'll manage the inner HTML content via the React useEffect below
-      return container;
-    }
-  });
-
-  useEffect(() => {
-    // 1. Find the existing control instance or create a new one
-    const selector = `.leaflet-bottom.leaflet-right .leaflet-control-legend-container`;
-    let controlContainer = map.getContainer().querySelector(selector) as HTMLDivElement | null;
-    let legendInstance: L.Control | undefined = undefined;
-
-    if (!controlContainer) {
-      // Create a new instance if none exists
-      legendInstance = new LegendClass();
-      legendInstance.addTo(map);
-      // After adding, find the new container again
-      controlContainer = map.getContainer().querySelector(selector) as HTMLDivElement | null;
-    }
-
-    if (!controlContainer) return;
-
-    // 2. Clear and inject the relevant legends as inner HTML
-    controlContainer.innerHTML = ''; // Clear previous content
-
-    if (isLULCActive) {
-      const lulcHtml = createLegendHTML("LEGEND", lulcLegendItems);
-      controlContainer.innerHTML += lulcHtml;
-    }
+//   const { useMap } = require("react-leaflet");
+//   const map = useMap();
 
 
 
-    // 3. Cleanup: Only remove the instance if the component unmounts
-    return () => {
-      // We don't remove the instance here, only on component unmount
-      // Find the instance if needed, but managing content is simpler
-      if (legendInstance) {
-        legendInstance.remove();
-      }
-    };
+//   const LegendClass = L.Control.extend({
+//     options: {
+//       position: 'bottomright',
+//     },
+//     onAdd: function (map: L.Map) {
 
-    // Re-run whenever the active state changes
-  }, [map, isLULCActive]);
+//       const container = L.DomUtil.create('div', 'leaflet-control-legend-container flex flex-col gap-2');
+//       L.DomEvent.disableClickPropagation(container);
+//       L.DomEvent.disableScrollPropagation(container);
+//       return container;
+//     }
+//   });
 
-  // This component only manages the Leaflet control lifecycle, renders nothing itself
-  return null;
-};
+//   useEffect(() => {
+//     const selector = `.leaflet-bottom.leaflet-right .leaflet-control-legend-container`;
+//     let controlContainer = map.getContainer().querySelector(selector) as HTMLDivElement | null;
+//     let legendInstance: L.Control | undefined = undefined;
+
+//     if (!controlContainer) {
+
+//       legendInstance = new LegendClass();
+//       legendInstance.addTo(map);
+//       controlContainer = map.getContainer().querySelector(selector) as HTMLDivElement | null;
+//     }
+
+//     if (!controlContainer) return;
+
+//     controlContainer.innerHTML = '';
+
+//     if (isLULCActive) {
+//       const lulcHtml = createLegendHTML("LEGEND", lulcLegendItems);
+//       controlContainer.innerHTML += lulcHtml;
+//     }
+
+
+
+//     return () => {
+
+//       if (legendInstance) {
+//         legendInstance.remove();
+//       }
+//     };
+
+
+//   }, [map, isLULCActive]);
+
+//   return null;
+// };
 
 
 const MapContent = ({
@@ -181,9 +164,9 @@ const MapContent = ({
         ))}
 
 
-      <MapLegendControl
+      {/* <MapLegendControl
         isLULCActive={isLULCActive}
-      />
+      /> */}
 
     </MapContainer>
   );
@@ -308,7 +291,7 @@ const MapGEE = () => {
         </div>
 
         {/* Legend Section */}
-        <div className="space-y-3 border-t border-border pt-6">
+        <div className=" px-3 space-y-3 border-t border-border pt-6">
           <h2 className="text-sm font-semibold text-foreground uppercase tracking-wide">Legend</h2>
 
           {/* LULC Legend (Shown if any LULC layer is active) */}

@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "LULC Analytics Dashboard",
   description: "Land Use/Land Cover Analytics and Change Statistics",
-  generator: "v0.app",
+  generator: "zameer",
   icons: {
     icon: [
       {
@@ -36,37 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // <html lang="en" className="h-full overflow-hidden">
-    //   <body className="h-full flex flex-col overflow-hidden">
-    //     <header className="bg-slate-950 border-b border-slate-700 sticky top-0 z-50 flex-shrink-0">
-    //       <div className="max-w-7xl mx-auto px-8 py-4">
-    //         <div className="flex items-center justify-between">
-    //           <h1 className="text-2xl font-bold text-white">LULC Dashboard</h1>
-    //           <nav className="flex gap-6">
-    //             <a href="/analysis" className="text-slate-300 hover:text-white font-medium transition-colors">
-    //               📊 Analysis
-    //             </a>
-    //             <a href="/map" className="text-slate-300 hover:text-white font-medium transition-colors">
-    //               🗺️ Map
-    //             </a>
-    //           </nav>
-    //         </div>
-    //       </div>
-    //     </header>
 
-    //     {/* Make content fill height & prevent scrolling */}
-    //     <div className="flex-1 overflow-hidden">
-    //       {children}
-    //     </div>
-
-
-    //     <Analytics />
-    //     <footer className="w-full  text-center text-sm text-gray-500">
-    //       FYP by <span className="font-semibold">Zameer Abbas</span> — GIS & RS 2020
-    //     </footer>
-
-    //   </body>
-    // </html>
     <html lang="en" className="h-full overflow-hidden">
       <body className="h-full flex flex-col overflow-hidden">
 
@@ -81,18 +51,14 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-
-        {/* Middle section takes remaining space exactly */}
         <div className="flex-1  overflow-y-scroll">
           {children}
         </div>
 
-        {/* Footer stays at the bottom */}
         <footer className=" text-center text-sm text-gray-500 flex-shrink-0">
           FYP by <span className="font-semibold">Zameer Abbas</span> — GIS & RS 2020
         </footer>
 
-        {/* Analytics after layout so it won't break height */}
         <Analytics />
 
       </body>

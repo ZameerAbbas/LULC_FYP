@@ -52,7 +52,8 @@ const LULCAnalytics = () => {
           const year = feature.properties.Year
           const classId = feature.properties.Class_ID
           const className = classNameMap[classId as keyof typeof classNameMap]
-          const area = feature.properties.Area_km2
+          const area = feature.properties.Area_km2?.toFixed(3)
+          const percentage = feature.properties.Percent?.toFixed(2)
 
           years.add(year)
 
@@ -62,6 +63,7 @@ const LULCAnalytics = () => {
             chartData.push(yearData)
           }
           yearData[className] = area
+          yearData[`${className}_percent`] = percentage
         })
 
         chartData.sort((a, b) => a.year - b.year)
@@ -80,8 +82,8 @@ const LULCAnalytics = () => {
           period: `${feature.properties.Start_Year}-${feature.properties.End_Year}`,
           startYear: feature.properties.Start_Year,
           endYear: feature.properties.End_Year,
-          changedArea: feature.properties.Changed_Area_km2,
-          changedPercent: feature.properties.Changed_Percent,
+          changedArea: feature.properties.Changed_Area_km2.toFixed(3),
+          changedPercent: feature.properties.Changed_Percent.toFixed(3),
         }))
         setChangeData(changes.sort((a: any, b: any) => a.startYear - b.startYear))
       })
@@ -97,6 +99,8 @@ const LULCAnalytics = () => {
   const toggleAllYears = () => {
     setSelectedYears(showCombined ? [] : allYears)
   }
+
+  console.log("filteredLULCData", filteredLULCData)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 p-8">
@@ -165,6 +169,8 @@ const LULCAnalytics = () => {
             <CardContent>
               <div className="h-96 bg-slate-900/50 rounded-lg p-4">
                 {filteredLULCData.length > 0 ? (
+        
+
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={filteredLULCData} margin={{ top: 20, right: 30, left: 0, bottom: 60 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
@@ -178,6 +184,10 @@ const LULCAnalytics = () => {
                         }}
                         labelStyle={{ color: "#e2e8f0" }}
                         cursor={{ fill: "rgba(59, 130, 246, 0.1)" }}
+                        formatter={(value, name, props) => {
+                          const percent = props.payload[`${name}_percent`]
+                          return [`${value} km² (${percent}%)`, name]
+                        }}
                       />
                       <Legend wrapperStyle={{ paddingTop: "20px" }} />
                       {Object.keys(classColors).map((className) => (
@@ -191,6 +201,7 @@ const LULCAnalytics = () => {
                       ))}
                     </BarChart>
                   </ResponsiveContainer>
+
                 ) : (
                   <div className="h-full flex items-center justify-center text-slate-400">
                     Select years to display chart
