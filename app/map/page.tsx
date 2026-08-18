@@ -28,17 +28,17 @@ const ZOOM = 13.5
 
 const TILE_URLS: TileUrls = {
   "LULC 2015":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/afe7dea846d8318d5b7af5175c8ed93e-e4425019d979a3d17ee4c6512b1d63d7/tiles/{z}/{x}/{y}",
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/afe7dea846d8318d5b7af5175c8ed93e-700d4b48dc485f17778ed0aaa3c1449e/tiles/{z}/{x}/{y}",
   "LULC 2020":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/dbe0a878f87c9e40632c1da2d3121d0f-8980e9e33b95377c9ee5c4a64a688bec/tiles/{z}/{x}/{y}",
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/dbe0a878f87c9e40632c1da2d3121d0f-873df9c6e200b4b3737af2f863dc6a97/tiles/{z}/{x}/{y}",
   "LULC 2024":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/a21e0da086467116bfaa7b1274b97e6a-476d2049010ae55396af6365ec7afd4b/tiles/{z}/{x}/{y}",
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/a21e0da086467116bfaa7b1274b97e6a-0e0ea7ef7d23bd3641576b9c06948029/tiles/{z}/{x}/{y}",
   "CHANGE 15 20":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/f92c22a9acfc0bb55c77b84741f70c5a-54ecb18463ebfa05f63232d6876efad4/tiles/{z}/{x}/{y}",
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/f92c22a9acfc0bb55c77b84741f70c5a-cf501a191df9a4c414a961181a1de07d/tiles/{z}/{x}/{y}",
   "CHANGE 15 24":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/0a84ef9c90a3dcff13ed3f00ba2e1239-707e58481745fdf2ee99f59918583433/tiles/{z}/{x}/{y}",
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/0a84ef9c90a3dcff13ed3f00ba2e1239-3bf28e7f5af4b65eb229588f6664f321/tiles/{z}/{x}/{y}",
   "CHANGE 20 24":
-    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/f7ba60ee6ed60193196dba282bec0109-ffabc58c8a6b2395705958c7fb385c6a/tiles/{z}/{x}/{y}"
+    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/f7ba60ee6ed60193196dba282bec0109-7309be9515b6f54bae4f1e62995164a8/tiles/{z}/{x}/{y}"
 }
 
 // LULC Legend (5 classes)
