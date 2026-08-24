@@ -25,7 +25,6 @@ type LayerOpacitiesState = { [K in LayerKey]: number }
 // ------------------------------------
 const CENTER: LatLngExpression = [36.2512, 74.3226]
 const ZOOM = 13.5
-
 const TILE_URLS: TileUrls = {
   "LULC 2015":
    "https://earthengine.googleapis.com/v1/projects/ee-my-zameer/maps/afe7dea846d8318d5b7af5175c8ed93e-f2b7cd27a85442b1830b88ca28f4f5e3/tiles/{z}/{x}/{y}",
